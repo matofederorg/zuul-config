@@ -1,0 +1,34 @@
+---
+- project:
+    name: ^matofederorg.*$
+    default-branch: main
+    merge-mode: "merge"
+    gh_check:
+      jobs: []
+    gh_gate:
+      jobs: []
+    gh_post:
+      jobs: []
+    gh_tag:
+      jobs: []
+
+- project:
+    name: zuul/zuul-jobs
+    default-branch: master
+
+- project:
+    name: matofederorg/zuul-config
+    merge-mode: "merge"
+    default-branch: main
+    gh_check:
+      jobs:
+        - noop
+    gh_gate:
+      jobs:
+        - noop
+    gh_post:
+      jobs:
+        - noop
+    gh_tag:
+      jobs:
+        - noop
