@@ -5,7 +5,7 @@
       initial check status.
     manager: independent
     trigger:
-      githubzuulapp:
+      github:
         # Run this pipeline on new/changed pull requests
         - event: pull_request
           action:
@@ -22,11 +22,11 @@
           action: rerequested
           check: .*/check:.*
     start:
-      githubzuulapp:
+      github:
         check: 'in_progress'
         comment: false
         # It is recommended to use the checks API for consistency with
-        # other common CI tools that integrate with githubzuulapp.  Results
+        # other common CI tools that integrate with github.  Results
         # will appear on the "checks" tab of PR and changes.  There is
         # generally no need to have Zuul leave comments when using the
         # checks API.
@@ -39,17 +39,17 @@
         #status: 'pending'
         #comment: false
     success:
-      githubzuulapp:
+      github:
         check: 'success'
         comment: false
         #status: 'success'
     failure:
-      githubzuulapp:
+      github:
         check: 'failure'
         comment: false
         #status: 'failure'
     dequeue:
-      githubzuulapp:
+      github:
         check: cancelled
         comment: false
 
@@ -63,7 +63,7 @@
     precedence: high
     supercedes: check
     require:
-      githubzuulapp:
+      github:
         review:
           # Require an approval from user with write access (e.g. core-reviewer)
           - permission: write
@@ -73,7 +73,7 @@
         open: True
         current-patchset: True
     trigger:
-      githubzuulapp:
+      github:
         - event: pull_request_review
           action: submitted
           state: approved
@@ -94,23 +94,23 @@
           label:
             - gate
     start:
-      githubzuulapp:
+      github:
         check: 'in_progress'
         comment: false
         #status: 'pending'
     success:
-      githubzuulapp:
+      github:
         check: 'success'
         comment: false
         #status: 'success'
         merge: true
     failure:
-      githubzuulapp:
+      github:
         check: 'failure'
         #status: 'failure'
         comment: false
     dequeue:
-      githubzuulapp:
+      github:
         check: cancelled
         comment: false
     window-floor: 20
@@ -123,7 +123,7 @@
     manager: independent
     precedence: low
     trigger:
-      githubzuulapp:
+      github:
         - event: push
           ref: ^refs/heads/.*$
 
@@ -134,6 +134,6 @@
     precedence: high
     post-review: True
     trigger:
-      githubzuulapp:
+      github:
         - event: push
           ref: ^refs/tags/.*$

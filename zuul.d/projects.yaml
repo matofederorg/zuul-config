@@ -3,13 +3,13 @@
     name: ^matofederorg.*$
     default-branch: main
     merge-mode: "merge"
-    gh_check:
+    check:
       jobs: []
-    gh_gate:
+    gate:
       jobs: []
-    gh_post:
+    post:
       jobs: []
-    gh_tag:
+    tag:
       jobs: []
 
 - project:
@@ -20,15 +20,15 @@
     name: matofederorg/zuul-config
     merge-mode: "merge"
     default-branch: main
-    gh_check:
+    check:
       jobs:
         - noop
-    gh_gate:
+    gate:
       jobs:
         - noop
-    gh_post:
+    post:
       jobs:
         - noop
-    gh_tag:
+    tag:
       jobs:
         - noop
