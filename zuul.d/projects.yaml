@@ -1,15 +1,11 @@
 ---
 - project:
-    name: ^matofederorg.*$
-    default-branch: main
-    merge-mode: "merge"
+    name: ^.*$
     check:
       jobs: []
     gate:
       jobs: []
     post:
-      jobs: []
-    tag:
       jobs: []
 
 - project:
@@ -18,7 +14,6 @@
 
 - project:
     name: matofederorg/zuul-config
-    merge-mode: "merge"
     default-branch: main
     check:
       jobs:
@@ -27,8 +22,5 @@
       jobs:
         - noop
     post:
-      jobs:
-        - noop
-    tag:
       jobs:
         - noop

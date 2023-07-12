@@ -126,14 +126,3 @@
       github:
         - event: push
           ref: ^refs/heads/.*$
-
-- pipeline:
-    name: tag
-    description: This pipeline runs jobs in response to any tag event.
-    manager: independent
-    precedence: high
-    post-review: True
-    trigger:
-      github:
-        - event: push
-          ref: ^refs/tags/.*$

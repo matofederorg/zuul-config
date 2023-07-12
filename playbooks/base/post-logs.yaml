@@ -1,9 +1,0 @@
----
-- hosts: localhost
-  gather_facts: false
-  roles:
-    - generate-zuul-manifest
-    - role: upload-logs
-      vars:
-        # use your dns or ip address here
-        zuul_log_url: "http://213.131.230.109:9000"
