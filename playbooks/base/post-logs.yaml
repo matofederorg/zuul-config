@@ -1,0 +1,9 @@
+---
+- name: Base post-logs
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - generate-zuul-manifest
+    - role: upload-logs
+      vars:
+        zuul_log_url: "http://213.131.230.109:8000"
