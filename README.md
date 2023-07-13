@@ -26,8 +26,8 @@ sudo apt-get install git docker-compose
 
 ## Deploy Zuul
 
-Steps taken from 
-- https://github.com/tibeerorg/zuul_setup_guide (thx Tim!)
+Steps taken from:
+- https://github.com/tibeerorg/zuul_setup_guide (most parts have been taken from here! Big thanks to Tim for his work!)
 - https://zuul-ci.org/docs/zuul/latest/tutorials/quick-start.html
 - https://zuul-ci.org/docs/zuul/latest/drivers/github.html#github
 

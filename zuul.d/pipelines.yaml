@@ -41,12 +41,12 @@
     success:
       github:
         check: 'success'
-        comment: false
+        comment: true
         #status: 'success'
     failure:
       github:
         check: 'failure'
-        comment: false
+        comment: true
         #status: 'failure'
     dequeue:
       github:
