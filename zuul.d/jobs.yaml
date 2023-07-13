@@ -1,3 +1,6 @@
+### Note: Pre run role `validate-host` requires `ip` command on the worker node.
+###       Ensure that this is installed in the node image"
+###       `sed -i.bak '/.*rsync.*/a \        iproute2 \\' node-Dockerfile`
 - job:
     name: base
     parent: null
@@ -20,3 +23,13 @@
       nodes:
         - name: ubuntu-jammy
           label: ubuntu-jammy
+
+### Note: If you want to use super-simple base job, without any pre- / post-runs
+###       uncomment the below one and comment the above one
+#- job:
+#    name: base
+#    parent: null
+#    nodeset:
+#      nodes:
+#        - name: ubuntu-jammy
+#          label: ubuntu-jammy

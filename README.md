@@ -95,7 +95,17 @@ Replace all content with the equivalent content below.
 Note the name of the `source` stanza matches your connection name you put earlier in the `Webhook URL`.
 Note that at least the `config-projects` GitHub repositories need to exist before
 you start your Zuul services. You may use the one from this organization, see https://github.com/matofederorg/zuul-config
-but I would suggest to clone it to your account/organization (then you will also be able to set the log server).
+
+This example `zuul-config` contains `base` job that runs some pre- / post-runs to provide more visibility.
+Pre run role `validate-host` requires `ip` command on the worker node. This `ip` command is not installed in 
+the worker node Dockerfile: *~/zuul/doc/source/examples/node-Dockerfile*.
+Patch this file if you want to use provided `base` job:
+
+```bash
+sed -i.bak '/.*rsync.*/a \        iproute2 \\' ~/zuul/doc/source/examples/node-Dockerfile
+```
+
+I would suggest to clone it to your account/organization (then you will also be able to set the log server).
 
 The *opendev.org* connection is highly recommended. The base jobs are based on this job collection.
 By defining *include* you can restrict zuul to only load jobs and not something like pipelines.
