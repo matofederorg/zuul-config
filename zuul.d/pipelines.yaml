@@ -79,7 +79,7 @@
           state: comment
         - event: pull_request
           action: comment
-          comment: (?i)^\s*regate\s*$
+          comment: (?i)^\s*/test_conformance\s*$
 #        - event: pull_request_review
 #          action: dismissed
 #          state: request_changes
