@@ -8,7 +8,7 @@
       The recommended base job.
 
       All jobs ultimately inherit from this.  It runs a pre-playbook
-      which copies all of the job's prepared git repos on to all of
+      which copies all of the job's prepared git repos on to all of 
       the nodes in the nodeset.
 
       It also sets a default timeout value (which may be overidden).
@@ -24,12 +24,18 @@
         - name: ubuntu-jammy
           label: ubuntu-jammy
 
-### Note: If you want to use super-simple base job, without any pre- / post-runs
-###       uncomment the below one and comment the above one
-#- job:
-#    name: base
-#    parent: null
-#    nodeset:
-#      nodes:
-#        - name: ubuntu-jammy
-#          label: ubuntu-jammy
+- semaphore:
+    name: semaphore-openstack-access
+    max: 1
+
+- job:
+    name: openstack-access-base
+    parent: base
+    pre-run: playbooks/openstack/access.yaml
+    semaphores:
+      - semaphore-openstack-access
+    vars:
+      cloud: "zuul-ci"
+    secrets:
+      - secret: openstack-application-credential
+        name: openstack_appcred

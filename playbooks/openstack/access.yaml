@@ -1,0 +1,15 @@
+---
+- name: OpenStack access configuration file
+  hosts: all
+  tasks:
+    - name: Ensure openstack directory exists
+      file:
+        path: "/etc/openstack"
+        state: directory
+    - name: Create clouds.yaml
+      template:
+        src: "templates/clouds.yaml.j2"
+        dest: "/etc/openstack/clouds.yaml"
+    - zuul_return:
+        data:
+          foo: bar

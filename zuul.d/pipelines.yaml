@@ -54,69 +54,6 @@
         comment: false
 
 - pipeline:
-    name: gate-k8s-capi
-    description: |
-      Changes that have been approved by core developers are enqueued
-      in order in this pipeline, and if they pass tests, will be
-      merged.
-    manager: dependent
-    precedence: high
-    supercedes: check
-    require:
-      github:
-        review:
-          # Require an approval from user with write access (e.g. core-reviewer)
-          - permission: write
-            type: comment
-        # Require label
-#        label: gate
-        open: True
-#        current-patchset: True
-    trigger:
-      github:
-        - event: pull_request_review
-          action: submitted
-          state: comment
-        - event: pull_request
-          action: comment
-          comment: (?i)^\s*/test_conformance\s*$
-#        - event: pull_request_review
-#          action: dismissed
-#          state: request_changes
-#        - event: pull_request
-#          action: status
-#          status: ".*:success"
-#        - event: check_run
-#          action: rerequested
-#          check: .*/gate:.*
-#        - event: pull_request
-#          action: labeled
-#          label:
-#            - gate
-    start:
-      github:
-        check: 'in_progress'
-        comment: false
-        #status: 'pending'
-    success:
-      github:
-        check: 'success'
-        comment: true
-        #status: 'success'
-#        merge: true
-    failure:
-      github:
-        check: 'failure'
-        #status: 'failure'
-        comment: true
-    dequeue:
-      github:
-        check: cancelled
-        comment: true
-#    window-floor: 20
-#    window-increase-factor: 2
-
-- pipeline:
     name: gate
     description: |
       Changes that have been approved by core developers are enqueued
@@ -189,3 +126,131 @@
       github:
         - event: push
           ref: ^refs/heads/.*$
+
+### Added pipelines
+
+- pipeline:
+    name: e2e-conformance
+    description: |
+      Changes that have been seen by trusted reviewer who labeled PR by e2e-conformance label
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: labeled
+          label:
+            - e2e-conformance
+    start:
+      github:
+        check: 'in_progress'
+        comment: false
+    success:
+      github:
+        check: 'success'
+        comment: true
+        label:
+          - tested-e2e-conformance
+        unlabel:
+          - e2e-conformance
+          - failed-e2e-conformance
+          - dequeued-e2e-conformance
+    failure:
+      github:
+        check: 'failure'
+        comment: true
+        label:
+          - failed-e2e-conformance
+        unlabel:
+          - e2e-conformance
+    dequeue:
+      github:
+        check: cancelled
+        comment: true
+        label:
+          - dequeued-e2e-conformance
+        unlabel:
+          - e2e-conformance
+
+- pipeline:
+    name: e2e-quick
+    description: |
+      Changes that have been seen by trusted reviewer who labeled PR by e2e-quick label
+    manager: independent
+    trigger:
+      github:
+        - event: pull_request
+          action: labeled
+          label:
+            - e2e-quick
+    start:
+      github:
+        check: 'in_progress'
+        comment: false
+    success:
+      github:
+        check: 'success'
+        comment: true
+        label:
+          - tested-e2e-quick
+        unlabel:
+          - e2e-quick
+          - failed-e2e-quick
+          - dequeued-e2e-quick
+    failure:
+      github:
+        check: 'failure'
+        comment: true
+        label:
+          - failed-e2e-quick
+        unlabel:
+          - e2e-quick
+    dequeue:
+      github:
+        check: cancelled
+        comment: true
+        label:
+          - dequeued-e2e-quick
+        unlabel:
+          - e2e-quick
+
+- pipeline:
+    name: unlabel-on-update-e2e-conformance
+    description: |
+      If a PR is updated and has the tested-e2e-conformance label, we want to remove that.
+    manager: independent
+    precedence: high
+    trigger:
+      github:
+        - event: pull_request
+          action:
+            - changed
+    require:
+      github:
+        label:
+          - tested-e2e-conformance
+    success:
+      github:
+        unlabel:
+          - tested-e2e-conformance
+        comment: false
+
+- pipeline:
+    name: unlabel-on-update-e2e-quick
+    description: |
+      If a PR is updated and has the tested-e2e-quick label, we want to remove that.
+    manager: independent
+    precedence: high
+    trigger:
+      github:
+        - event: pull_request
+          action:
+            - changed
+    require:
+      github:
+        label:
+          - tested-e2e-quick
+    success:
+      github:
+        unlabel:
+          - tested-e2e-quick
+        comment: false
