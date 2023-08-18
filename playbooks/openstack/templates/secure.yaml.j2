@@ -1,0 +1,6 @@
+clouds:
+  {{ cloud }}:
+    auth_type: "v3applicationcredential"
+    auth:
+      application_credential_id: {{ openstack_appcred.id }}
+      application_credential_secret: {{ openstack_appcred.secret }}

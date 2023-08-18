@@ -10,6 +10,7 @@
       template:
         src: "templates/clouds.yaml.j2"
         dest: "/etc/openstack/clouds.yaml"
-    - zuul_return:
-        data:
-          foo: bar
+    - name: Create secure.yaml
+      template:
+        src: "templates/secure.yaml.j2"
+        dest: "/etc/openstack/secure.yaml"
