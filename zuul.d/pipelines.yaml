@@ -130,16 +130,19 @@
 ### Added pipelines
 
 - pipeline:
-    name: e2e-conformance
+    name: e2e-test
     description: |
-      Changes that have been seen by trusted reviewer who labeled PR by e2e-conformance label
+      Changes that have been seen by trusted reviewer who labeled PR by e2e-test label
+    success-message: Build succeeded (e2e-test pipeline).
+    failure-message: Build failed (e2e-test pipeline).
+    dequeue-message: Build canceled (e2e-test pipeline).
     manager: independent
     trigger:
       github:
         - event: pull_request
           action: labeled
           label:
-            - e2e-conformance
+            - e2e-test
     start:
       github:
         check: 'in_progress'
@@ -149,39 +152,42 @@
         check: 'success'
         comment: true
         label:
-          - tested-e2e-conformance
+          - e2e-tested
         unlabel:
-          - e2e-conformance
-          - failed-e2e-conformance
-          - dequeued-e2e-conformance
+          - e2e-test
+          - failed-e2e-test
+          - cancelled-e2e-test
     failure:
       github:
         check: 'failure'
         comment: true
         label:
-          - failed-e2e-conformance
+          - failed-e2e-test
         unlabel:
-          - e2e-conformance
+          - e2e-test
     dequeue:
       github:
         check: cancelled
         comment: true
         label:
-          - dequeued-e2e-conformance
+          - cancelled-e2e-test
         unlabel:
-          - e2e-conformance
+          - e2e-test
 
 - pipeline:
-    name: e2e-quick
+    name: e2e-quick-test
     description: |
-      Changes that have been seen by trusted reviewer who labeled PR by e2e-quick label
+      Changes that have been seen by trusted reviewer who labeled PR by e2e-quick-test label
+    success-message: Build succeeded (e2e-quick-test pipeline).
+    failure-message: Build failed (e2e-quick-test pipeline).
+    dequeue-message: Build canceled (e2e-quick-test pipeline).
     manager: independent
     trigger:
       github:
         - event: pull_request
           action: labeled
           label:
-            - e2e-quick
+            - e2e-quick-test
     start:
       github:
         check: 'in_progress'
@@ -191,32 +197,32 @@
         check: 'success'
         comment: true
         label:
-          - tested-e2e-quick
+          - e2e-quick-tested
         unlabel:
-          - e2e-quick
-          - failed-e2e-quick
-          - dequeued-e2e-quick
+          - e2e-quick-test
+          - failed-e2e-quick-test
+          - cancelled-e2e-quick-test
     failure:
       github:
         check: 'failure'
         comment: true
         label:
-          - failed-e2e-quick
+          - failed-e2e-quick-test
         unlabel:
-          - e2e-quick
+          - e2e-quick-test
     dequeue:
       github:
         check: cancelled
         comment: true
         label:
-          - dequeued-e2e-quick
+          - cancelled-e2e-quick-test
         unlabel:
-          - e2e-quick
+          - e2e-quick-test
 
 - pipeline:
-    name: unlabel-on-update-e2e-conformance
+    name: unlabel-on-update-e2e-test
     description: |
-      If a PR is updated and has the tested-e2e-conformance label, we want to remove that.
+      If a PR is updated and has the e2e-tested label, we want to remove that.
     manager: independent
     precedence: high
     trigger:
@@ -227,17 +233,17 @@
     require:
       github:
         label:
-          - tested-e2e-conformance
+          - e2e-tested
     success:
       github:
         unlabel:
-          - tested-e2e-conformance
+          - e2e-tested
         comment: false
 
 - pipeline:
-    name: unlabel-on-update-e2e-quick
+    name: unlabel-on-update-e2e-quick-test
     description: |
-      If a PR is updated and has the tested-e2e-quick label, we want to remove that.
+      If a PR is updated and has the e2e-quick-tested label, we want to remove that.
     manager: independent
     precedence: high
     trigger:
@@ -248,9 +254,9 @@
     require:
       github:
         label:
-          - tested-e2e-quick
+          - e2e-quick-tested
     success:
       github:
         unlabel:
-          - tested-e2e-quick
+          - e2e-quick-tested
         comment: false
