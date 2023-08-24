@@ -152,7 +152,7 @@
         check: 'success'
         comment: true
         label:
-          - e2e-tested
+          - successful-e2e-test
         unlabel:
           - e2e-test
           - failed-e2e-test
@@ -197,7 +197,7 @@
         check: 'success'
         comment: true
         label:
-          - e2e-quick-tested
+          - successful-e2e-quick-test
         unlabel:
           - e2e-quick-test
           - failed-e2e-quick-test
@@ -222,7 +222,7 @@
 - pipeline:
     name: unlabel-on-update-e2e-test
     description: |
-      If a PR is updated and has the e2e-tested label, we want to remove that.
+      If a PR is updated and has the successful-e2e-test label, we want to remove that.
     manager: independent
     precedence: high
     trigger:
@@ -233,17 +233,17 @@
     require:
       github:
         label:
-          - e2e-tested
+          - successful-e2e-test
     success:
       github:
         unlabel:
-          - e2e-tested
+          - successful-e2e-test
         comment: false
 
 - pipeline:
     name: unlabel-on-update-e2e-quick-test
     description: |
-      If a PR is updated and has the e2e-quick-tested label, we want to remove that.
+      If a PR is updated and has the successful-e2e-quick-test label, we want to remove that.
     manager: independent
     precedence: high
     trigger:
@@ -254,9 +254,9 @@
     require:
       github:
         label:
-          - e2e-quick-tested
+          - successful-e2e-quick-test
     success:
       github:
         unlabel:
-          - e2e-quick-tested
+          - successful-e2e-quick-test
         comment: false
