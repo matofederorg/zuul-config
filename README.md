@@ -1,4 +1,4 @@
-# Zuul-CI 
+# Zuul-CI
 
 ## Create VM on OpenStack
 
@@ -13,16 +13,18 @@ openstack security group create allow-all
 openstack security group rule create --remote-ip 0.0.0.0/0  allow-all
 
 openstack server create --flavor SCS-2V:4:20 --image 'Ubuntu 22.04' --key-name mfeder --network zuul --security-group allow-all --security-group default zuul
-TODO: add floating IP
+
+openstack floating ip create ext01
+openstack server add floating ip zuul 213.131.230.109
 ```
 
-### Access VM and install deps.
+### Access VM and install deps
 
 - Install Docker: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
 - Install other deps:
-```bash
-sudo apt-get install git docker-compose
-```
+  ```bash
+  sudo apt-get install git docker-compose
+  ```
 
 ## Deploy Zuul
 
@@ -50,9 +52,11 @@ You can either create one for your organization or for your account.
    - `zuul-hostname` is the IP or DNS name of your server
    - `port` is the Zuul port (typically ***9000***)
    - `connection-name` is the name you will later set in your zuul configuration. In this case I use ***github***
+
    for example: `http://213.131.230.109:9000/api/connection/github/payload`
 8. Set the `Webhook secret` to a value of your choice and save it for later. I'll use ***wekhooksecretvalue***
 9. Select the following `Repository persmissions`:
+
    | Permission        | Access           |
    |-------------------|------------------|
    | *Administration*  | **Read-only**    |
@@ -62,18 +66,18 @@ You can either create one for your organization or for your account.
    | *Pull requests*   | **Read & write** |
    | *Commit statuses* | **Read & write** |
 10. Select the events you whish to subscribe to:
-  - *Check run*
-  - *Commit comment*
-  - *Create*
-  - *Issue comment*
-  - *Issues*
-  - *Label*
-  - *Pull request*
-  - *Pull request review*
-  - *Pull request review comment*
-  - *Push*
-  - *Release*
-  - *Status*
+    - *Check run*
+    - *Commit comment*
+    - *Create*
+    - *Issue comment*
+    - *Issues*
+    - *Label*
+    - *Pull request*
+    - *Pull request review*
+    - *Pull request review comment*
+    - *Push*
+    - *Release*
+    - *Status*
 11. Select `Where can this GitHub App be installed?` to ***Only on this account***
 12. Click on `Create GitHub App`
 13. Save also the `App ID` for later (in our case ***360352***)
@@ -97,7 +101,7 @@ Note that at least the `config-projects` GitHub repositories need to exist befor
 you start your Zuul services. You may use the one from this organization, see https://github.com/matofederorg/zuul-config
 
 This example `zuul-config` contains `base` job that runs some pre- / post-runs to provide more visibility.
-Pre run role `validate-host` requires `ip` command on the worker node. This `ip` command is not installed in 
+Pre run role `validate-host` requires `ip` command on the worker node. This `ip` command is not installed in
 the worker node Dockerfile: *~/zuul/doc/source/examples/node-Dockerfile*.
 Patch this file if you want to use provided `base` job:
 

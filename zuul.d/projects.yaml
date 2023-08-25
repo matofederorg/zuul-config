@@ -24,13 +24,3 @@
     post:
       jobs:
         - noop
-
-- project:
-    name: matofederorg/k8s-cluster-api-provider
-    default-branch: main
-    unlabel-on-update-e2e-test:
-      jobs:
-        - noop
-    unlabel-on-update-e2e-quick-test:
-      jobs:
-        - noop

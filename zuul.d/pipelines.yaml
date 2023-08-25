@@ -165,6 +165,8 @@
           - failed-e2e-test
         unlabel:
           - e2e-test
+          - successful-e2e-test
+          - cancelled-e2e-test
     dequeue:
       github:
         check: cancelled
@@ -173,6 +175,8 @@
           - cancelled-e2e-test
         unlabel:
           - e2e-test
+          - successful-e2e-test
+          - failed-e2e-test
 
 - pipeline:
     name: e2e-quick-test
@@ -210,6 +214,8 @@
           - failed-e2e-quick-test
         unlabel:
           - e2e-quick-test
+          - successful-e2e-quick-test
+          - cancelled-e2e-quick-test
     dequeue:
       github:
         check: cancelled
@@ -218,6 +224,8 @@
           - cancelled-e2e-quick-test
         unlabel:
           - e2e-quick-test
+          - successful-e2e-quick-test
+          - failed-e2e-quick-test
 
 - pipeline:
     name: unlabel-on-update-e2e-test

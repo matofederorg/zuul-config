@@ -1,6 +1,7 @@
 ---
 - name: OpenStack access configuration file
   hosts: all
+  become: true
   tasks:
     - name: Ensure openstack directory exists
       file:
