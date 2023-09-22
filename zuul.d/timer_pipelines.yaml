@@ -17,4 +17,4 @@
     precedence: low
     trigger:
       timer:
-        - time: '50 10 * * *'
+        - time: '58 10 * * *'
