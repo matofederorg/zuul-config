@@ -17,7 +17,7 @@
     precedence: low
     trigger:
       timer:
-        - time: '26 10 * * *'
+        - time: '32 10 * * *'
 - pipeline:
     name: periodic-10min
     description: This pipeline runs jobs every 10 minutes
