@@ -1,20 +1,8 @@
 ---
 - project:
-    name: ^.*$
-    check:
-      jobs: []
-    gate:
-      jobs: []
-    post:
-      jobs: []
-
-- project:
-    name: zuul/zuul-jobs
-    default-branch: master
-
-- project:
     name: matofederorg/zuul-config
     default-branch: main
+    merge-mode: "squash-merge"
     check:
       jobs:
         - noop
@@ -22,5 +10,8 @@
       jobs:
         - noop
     post:
+      jobs:
+        - noop
+    tag:
       jobs:
         - noop
