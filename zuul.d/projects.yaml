@@ -15,15 +15,3 @@
     tag:
       jobs:
         - noop
-
-- project:
-    name: matofederorg/k8s-cluster-api-provider
-    default-branch: main
-    merge-mode: "squash-merge"
-    periodic-daily:
-      jobs:
-      - k8s-cluster-api-provider-e2e-conformance:
-          branches:
-          - main
-          vars:
-            git_reference: "{{ zuul.branch }}"
