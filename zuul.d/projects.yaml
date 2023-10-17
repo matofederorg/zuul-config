@@ -16,13 +16,13 @@
       jobs:
         - noop
 
-#- project:
-#    name: matofederorg/k8s-cluster-api-provider
-#    periodic-daily:
-#      jobs:
-#      - k8s-cluster-api-provider-e2e-conformance:
-#          branches:
-#          - main
-#          - release/v6.0.0
-#          vars:
-#            git_reference: "{{ zuul.branch }}"
+- project:
+    name: matofederorg/k8s-cluster-api-provider
+    periodic-daily:
+      jobs:
+      - k8s-cluster-api-provider-e2e-conformance:
+          branches:
+          - main
+          - release/v6.0.0
+          vars:
+            git_reference: "{{ zuul.branch }}"
