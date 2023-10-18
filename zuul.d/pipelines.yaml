@@ -196,6 +196,8 @@
       github:
         check: 'in_progress'
         comment: false
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     success:
       github:
         check: 'success'
@@ -206,6 +208,8 @@
           - e2e-quick-test
           - failed-e2e-quick-test
           - cancelled-e2e-quick-test
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     failure:
       github:
         check: 'failure'
@@ -216,6 +220,8 @@
           - e2e-quick-test
           - successful-e2e-quick-test
           - cancelled-e2e-quick-test
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     dequeue:
       github:
         check: cancelled
@@ -226,6 +232,8 @@
           - e2e-quick-test
           - successful-e2e-quick-test
           - failed-e2e-quick-test
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
 
 - pipeline:
     name: unlabel-on-update-e2e-test
