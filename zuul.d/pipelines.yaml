@@ -196,8 +196,8 @@
       github:
         check: 'in_progress'
         comment: false
-      mqtt:
-        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
+#      mqtt:
+#        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
     success:
       github:
         check: 'success'
