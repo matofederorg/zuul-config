@@ -17,7 +17,19 @@
     precedence: low
     trigger:
       timer:
-        - time: '19 12 * * *'
+        - time: '27 12 * * *'
+    start:
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
+    success:
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
+    failure:
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
+    dequeue:
+      mqtt:
+        topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
 - pipeline:
     name: periodic-10min
     description: This pipeline runs jobs every 10 minutes
