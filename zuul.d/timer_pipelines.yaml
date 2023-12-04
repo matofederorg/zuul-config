@@ -17,7 +17,7 @@
     precedence: low
     trigger:
       timer:
-        - time: '40 12 * * *'
+        - time: '11 09 * * *'
     start:
       mqtt:
         topic: "zuul/{pipeline}/result/{project}/{branch}/{change}"
