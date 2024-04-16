@@ -15,7 +15,7 @@ openstack security group rule create --remote-ip 0.0.0.0/0  allow-all
 openstack server create --flavor SCS-2V:4:20 --image 'Ubuntu 22.04' --key-name mfeder --network zuul --security-group allow-all --security-group default zuul
 
 openstack floating ip create ext01
-openstack server add floating ip zuul 213.131.230.109
+openstack server add floating ip zuul 213.131.230.51
 ```
 
 ### Access VM and install deps
@@ -53,7 +53,7 @@ You can either create one for your organization or for your account.
    - `port` is the Zuul port (typically ***9000***)
    - `connection-name` is the name you will later set in your zuul configuration. In this case I use ***github***
 
-   for example: `http://213.131.230.109:9000/api/connection/github/payload`
+   for example: `http://213.131.230.51:9000/api/connection/github/payload`
 8. Set the `Webhook secret` to a value of your choice and save it for later. I'll use ***wekhooksecretvalue***
 9. Select the following `Repository persmissions`:
 
